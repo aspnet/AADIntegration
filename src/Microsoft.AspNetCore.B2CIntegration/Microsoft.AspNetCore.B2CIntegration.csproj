@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference 
+      Include="Microsoft.AspNetCore.Mvc"
+      Version="$(MicrosoftAspNetCoreMvcPackageVersion)" />
+    <PackageReference 
+      Include="Microsoft.AspNetCore.Authentication.Cookies"
+      Version="$(MicrosoftAspNetCoreAuthenticationCookiesPackageVersion)" />
+    <PackageReference 
+      Include="Microsoft.AspNetCore.Authentication.OpenIdConnect"
+      Version="$(MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion)" />
+  </ItemGroup>
+
+</Project>
