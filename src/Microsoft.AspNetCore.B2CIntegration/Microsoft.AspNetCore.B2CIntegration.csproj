@@ -1,7 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk;Microsoft.NET.Sdk.Razor">
+
+  <Import Project="$(MSBuildThisFileDirectory)Microsoft.AspNetCore.B2CIntegration.props" />
 
   <PropertyGroup>
+    <Description>ASP.NET Core B2C Integration provides components for easily integrating B2C authentication within your ASP.NET Core application.</Description>
+    <PrecompiledDescription>Precompiled views assembly for the ASP.NET Core B2C Integration package.</PrecompiledDescription>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>aspnetcore;authentication;b2c</PackageTags>
+    <RazorCompileOnBuild>true</RazorCompileOnBuild>
+    <PrecompiledAssemblyTitle Condition=" '$(PrecompiledAssemblyTitle)' == '' ">$(RazorTargetName).dll</PrecompiledAssemblyTitle>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,4 +24,22 @@
       Version="$(MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_parameter1>Microsoft.AspNetCore.Mvc.AdditionalReference</_parameter1>
+      <_parameter2>$(RazorTargetName).dll,false</_parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  
+  <Target Name="VerifyBuildOutputs" AfterTargets="Build">
+    <PropertyGroup>
+      <ExpectedOutputFile>$(OutputPath)$(RazorTargetName).dll</ExpectedOutputFile>
+    </PropertyGroup>
+
+    <Error Text="Unable to find precompiled view file $(ExpectedOutputFile)"
+      Condition="!Exists('$(ExpectedOutputFile)')" />
+  </Target>    
+
+  <Import Project="$(MSBuildThisFileDirectory)Microsoft.AspNetCore.B2CIntegration.targets" />
+  
 </Project>
