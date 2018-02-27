@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk;Microsoft.NET.Sdk.Razor">
+
+  <Import Project="$(MSBuildThisFileDirectory)Microsoft.AspNetCore.AADIntegration.props" />
+
+  <PropertyGroup>
+    <Description>ASP.NET Core Azure Active Directory Integration provides components for easily integrating Azure Active Directory authentication within your ASP.NET Core application.</Description>
+    <PrecompiledDescription>Precompiled views assembly for the ASP.NET Core AAD Integration package.</PrecompiledDescription>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>aspnetcore;authentication;aad</PackageTags>
+    <RazorCompileOnBuild>true</RazorCompileOnBuild>
+    <PrecompiledAssemblyTitle Condition=" '$(PrecompiledAssemblyTitle)' == '' ">$(RazorTargetName).dll</PrecompiledAssemblyTitle>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(MicrosoftAspNetCoreMvcPackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="$(MicrosoftAspNetCoreAuthenticationCookiesPackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(MicrosoftAspNetCoreAuthenticationOpenIdConnectPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_parameter1>Microsoft.AspNetCore.Mvc.AdditionalReference</_parameter1>
+      <_parameter2>$(RazorTargetName).dll,false</_parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  
+  <Target Name="VerifyBuildOutputs" AfterTargets="Build">
+    <PropertyGroup>
+      <ExpectedOutputFile>$(OutputPath)$(RazorTargetName).dll</ExpectedOutputFile>
+    </PropertyGroup>
+
+    <Error Text="Unable to find precompiled view file $(ExpectedOutputFile)" Condition="!Exists('$(ExpectedOutputFile)')" />
+  </Target>    
+
+  <Import Project="$(MSBuildThisFileDirectory)Microsoft.AspNetCore.AADIntegration.targets" />
+  
+</Project>

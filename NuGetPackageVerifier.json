@@ -9,7 +9,15 @@
                     "DOC_MISSING": {
                         "lib/netstandard2.0/Microsoft.AspNetCore.B2CIntegration.dll": "This is a library with packaged UI",
                         "lib/netstandard2.0/Microsoft.AspNetCore.B2CIntegration.Views.dll": "This assembly is generated and contains precompiled razor pages"
-                      }
+                    }
+                }
+            },
+            "Microsoft.AspNetCore.AADIntegration": {
+                "Exclusions": {
+                    "DOC_MISSING": {
+                        "lib/netstandard2.0/Microsoft.AspNetCore.AADIntegration.dll": "Enter justification",
+                        "lib/netstandard2.0/Microsoft.AspNetCore.AADIntegration.Views.dll": "Enter justification"
+                    }
                 }
             }
         }
