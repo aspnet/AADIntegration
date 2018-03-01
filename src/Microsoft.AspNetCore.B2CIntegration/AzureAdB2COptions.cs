@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.B2CIntegration
     /// </summary>
     public class AzureAdB2COptions
     {
-        public const string PolicyAuthenticationProperty = "Policy";
+        public static readonly string PolicyAuthenticationProperty = "Policy";
 
         /// <summary>
         /// Gets or sets the OpenID Connect authentication scheme to use for authentication with this instance
