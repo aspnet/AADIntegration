@@ -21,19 +21,8 @@ namespace B2CSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(o => o.DefaultScheme = "B2C")
-                .AddAzureAdB2C(options => Configuration.GetSection("AzureAdB2C").Bind(options))
-                .AddAzureAdB2C("B2C", "OpenId", "Cookie", "B2C", options =>
-                  {
-                      options.Instance = "https://login.microsoftonline.com/tfp/";
-                      options.ClientId = "64f31f76-2750-49e4-aab9-f5de105b5172";
-                      options.CallbackPath = "/signin-oidc-b2c";
-                      options.SignedOutCallbackPath = "/signout-callback-oidc-b2c";
-                      options.Domain = "jacalvarb2c.onmicrosoft.com";
-                      options.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                      options.ResetPasswordPolicyId = "B2C_1_SSPR";
-                      options.EditProfilePolicyId = "B2C_1_SiPe";
-                  });
+            services.AddAuthentication(AzureAdB2CDefaults.AuthenticationScheme)
+                .AddAzureAdB2C(options => Configuration.GetSection("AzureAdB2C").Bind(options));
 
             services.AddMvc();
         }

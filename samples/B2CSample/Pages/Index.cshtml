@@ -4,17 +4,6 @@
     ViewData["Title"] = "Home page";
 }
 
-@inject Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider SchemeProvider
-
-<div class="row"><h1>@ViewBag.Scheme</h1></div>
-<div class="row">
-    <ul class="list-inline">
-        @foreach (var scheme in await SchemeProvider.GetAllSchemesAsync())
-        {
-            if (!string.IsNullOrWhiteSpace(scheme.DisplayName))
-            {
-                <li><a class="btn btn-default" asp-controller="Account" asp-action="SignIn" asp-route-scheme="@scheme.Name">@scheme.DisplayName</a></li>
-            }
-        }
-    </ul>    
+<div>
+    <h1>@User.Identity.Name</h1>
 </div>
